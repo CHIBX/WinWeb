@@ -1,0 +1,46 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
+    "@pinia/nuxt": "^0.5.5",
+    "@unhead/vue": "^1.11.7",
+    "@vite-pwa/nuxt": "^0.10.5",
+    "@vueuse/components": "^11.1.0",
+    "@vueuse/core": "^11.1.0",
+    "@vueuse/nuxt": "^11.1.0",
+    "idb": "^8.0.0",
+    "minisearch": "^7.1.0",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.2.4",
+    "swiper": "^11.1.14",
+    "uid": "^2.0.2",
+    "vee-validate": "^4.13.2",
+    "vue": "^3.5.11",
+    "vue-router": "latest",
+    "vuedraggable": "^2.24.3",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@iconify/vue": "^4.1.2",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@types/eslint__js": "^8.42.3",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.11.1",
+    "lightningcss": "^1.27.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite-plugin-pwa": "^0.20.5",
+    "vite-svg-loader": "^5.1.0"
+  }
+}
