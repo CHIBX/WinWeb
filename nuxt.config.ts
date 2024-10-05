@@ -34,18 +34,12 @@ export default defineNuxtConfig({
 			base: { href: "/" },
 		},
 	},
-	postcss: {
-		plugins: {
-			tailwindcss: {},
-			autoprefixer: {},
-		},
-	},
 	modules: [
 		"@pinia/nuxt",
 		"@formkit/auto-animate/nuxt",
 		"@vite-pwa/nuxt",
 		"@vueuse/nuxt",
-		// "@nuxtjs/tailwindcss",
+		"@nuxtjs/tailwindcss",
 	],
 	css: ["~/assets/css/main.css"],
 	vue: {

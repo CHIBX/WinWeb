@@ -1,37 +1,21 @@
 <script setup lang="ts">
-import { delay } from '~/utils';
 
 const canShowLogin = ref(false);
-onMounted(() => {
-  delay(2000).then(() => canShowLogin.value = true);
-})
+
 </script>
 
 <template>
-  <div class="h-full overflow-hidden">
-    <WindowsLoading>
+  <div class="h-full overflow-hidden" @click="canShowLogin = true">
+    <!-- Disable animation until user decides to go to login  -->
+    <WindowsLoading :disable-anim="!canShowLogin" :style="canShowLogin && null">
       <template #default>
-        <Transition name="fade">
+        <Transition name="fade-lift">
           <div v-if="!canShowLogin"
             class="select-none flex-col gap-4 h-full w-full flex relative items-center justify-center">
-            <img src="/icons/windows_11.svg" class="" width="250" height="250" alt="logo">
-            <div class="mt-20 flex flex-col items-center gap-10">
-              <DotLoader style="--uib-size: 50px;" />
-              <div>
-                <strong class="mt-10 text-2xl tracking-wide">Windows is getting everything ready...</strong>
-              </div>
-            </div>
+            <LockScreen />
           </div>
-          <div class="h-full w-full" v-else>
-            <Suspense>
-              <LazyWindowsLogin />
-
-              <template #fallback>
-                <div class="h-full w-full flex items-center justify-center">
-                  <DotLoader style="--uib-size: 100px;" />
-                </div>
-              </template>
-            </Suspense>
+          <div class="h-full w-full flex justify-center" v-else>
+            <WindowsLogin />
           </div>
         </Transition>
       </template>
@@ -57,13 +41,14 @@ body,
   background-color: white;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.fade-lift-enter-active,
+.fade-lift-leave-active {
+  transition: all 0.3s ease-in-out;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-lift-enter-from,
+.fade-lift-leave-to {
   opacity: 0;
+  transform: translateY(-400px);
 }
 </style>
