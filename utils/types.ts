@@ -1,4 +1,10 @@
-import type { DBSchema } from "idb";
+import type { DBSchema, IDBPTransaction, StoreNames } from "idb";
+
+export type IDBTransactionWithWrite = IDBPTransaction<
+	WinWebSchema,
+	ArrayLike<StoreNames<WinWebSchema>>,
+	"readwrite"
+>;
 
 export type User = {
 	uid: string;
@@ -29,6 +35,12 @@ export interface WinWebSchema extends DBSchema {
 			size: number;
 			path: string;
 			isDir: boolean;
+		};
+		indexes: {
+			uid: string;
+			fullPath: string;
+			path: string;
+			userName: string;
 		};
 	};
 }

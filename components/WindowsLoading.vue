@@ -1,30 +1,18 @@
 <script lang="ts" setup>
-const props = defineProps<{ disableAnim?: boolean }>();
-const { x, y } = useMouse();
+const props = defineProps<{ stopBlur?: boolean }>();
 </script>
 
 <template>
-    <div class="fixed h-full w-full overflow-hidden blur-transition"
-        :style="$attrs.style as {} || { filter: 'blur(10px)' }">
-        <img src="/backgrounds/background_2.webp" class="object-cover h-full w-full" alt="background">
-        <div v-if="!disableAnim" class="background-blur absolute rounded-full" :style="{
-            left: `${x - 150}px`,
-            top: `${y - 150}px`,
-        }"></div>
+    <div class="fixed h-full w-full z-[1] overflow-hidden blur-transition"
+        :style="!stopBlur ? { backdropFilter: 'blur(20px)' } : null"
+        style="transition: 0.5s cubic-bezier(0.55, 0, 0.1, 1);">
     </div>
+    <img src="/backgrounds/windows_11_logo.webp" class="object-cover fixed h-full w-full" alt="background">
     <slot />
 </template>
 
 <style scoped>
-.background-blur {
-    width: 300px;
-    height: 300px;
-    background-image: linear-gradient(to bottom, rgb(171, 249, 255), rgb(127, 193, 255));
-    filter: blur(100px);
-    transform: translate3d(0, 0, 0);
-}
-
 .blur-transition {
-    transition: filter 0.5s ease-in-out;
+    transition: backdrop-filter 0.3s ease-in-out;
 }
 </style>

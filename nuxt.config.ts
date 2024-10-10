@@ -36,12 +36,26 @@ export default defineNuxtConfig({
 	},
 	modules: [
 		"@pinia/nuxt",
+		"@primevue/nuxt-module",
 		"@formkit/auto-animate/nuxt",
 		"@vite-pwa/nuxt",
 		"@vueuse/nuxt",
 		"@nuxtjs/tailwindcss",
 	],
 	css: ["~/assets/css/main.css"],
+	primevue: {
+		components: {
+			prefix: "Prime",
+		},
+		composables: {
+			exclude: "*",
+		},
+		directives: {
+			prefix: "p",
+			include: ["Ripple", "Tooltip"] /* Used as v-pripple and v-ptooltip */,
+		},
+		// usePrimeVue: false,
+	},
 	vue: {
 		compilerOptions: {
 			prefixIdentifiers: true,

@@ -1,40 +1,35 @@
 import { uid } from "uid";
-import { idb } from ".";
-import type { NewUser, User } from "./types";
+import type { IDBTransactionWithWrite, NewUser, User } from "@/utils/types";
 
 export async function getUsers() {
-	const tx = (await idb).transaction("users", "readonly");
+	const tx = await transaction("users", "readonly");
 	const store = tx.objectStore("users");
 	const users = await store.getAll();
 	return users;
 }
 
-export async function addUser(newUser: NewUser) {
-	const tx = (await idb).transaction("users", "readwrite");
+export async function addUser(tx: IDBTransactionWithWrite, newUser: NewUser) {
 	const store = tx.objectStore("users");
 	const user = { ...newUser, uid: uid(), isCurrent: false };
-	store.put(user);
-	await tx.done;
+	return store.put(user);
 }
 
-export async function deleteUsers() {
-	const tx = (await idb).transaction("users", "readwrite");
+export async function deleteUsers(tx: IDBTransactionWithWrite) {
 	const store = tx.objectStore("users");
-	store.clear();
-	await tx.done;
+	return store.clear();
 }
 export async function refreshUser() {
 	const userStore = useUser();
+	const tx = await transaction(void 0, "readwrite");
 	const defaultUser: User = {
 		avatar: null,
 		fullName: "John Doe",
 		isCurrent: true,
-		password: "password",
+		password: "1234",
 		uid: uid(),
-		userName: "default",
+		userName: "User",
 	};
-	await deleteUsers();
-	const tx = (await idb).transaction("users", "readwrite");
+	deleteUsers(tx);
 	const store = tx.objectStore("users");
 	store.put(defaultUser);
 	await tx.done;
